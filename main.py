@@ -1,51 +1,43 @@
-import pygame
-import sys
-from pygame.locals import *
+import os
+import random
+import math
+import pygame as pg
+from os import listdir
+from os.path import isfile,join
 
-pygame.init()
+from pygame.sprite import _Group
 
-background_colour = (0,0,0) 
-screen = pygame.display.set_mode((1200, 1000)) 
-pygame_icon = pygame.image.load('Images/Test_Tube_Icon.png')
+pg.init()
+pg.display.set_caption("Tested")
 
-pygame.display.set_caption('Tested')
-pygame.display.set_icon(pygame_icon)
-screen.fill(background_colour) 
-pygame.display.flip() 
-running = True
+BG_COLOR = (0,0,0)
+WIDTH,HEIGHT = 1000, 800
+FPS = 60
 
-class Character:
-    def __init__(self, image, x, y):
-        self.image = pygame.image.load(image)
-        self.x = x
-        self.y = y
+PLAYER_VEL = 5
 
-    def draw(self, screen):
-        screen.blit(self.image, (self.x, self.y))
+window = pg.display.set_mode((WIDTH,HEIGHT))
+
+class Player(pg.sprite.Sprite):
+    def __init__(self, x,y,width,height):
+        self.rect = pg.Rect(x,y,width,height)  
+        self.x_vel = 0
+        self.y_vel = 0
+        self.mask = None  
+
+def main (window):
+    clock = pg.time.Clock()
+
+    run = True
+
+    while run:
+        clock.tick(FPS)
+
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                run = False
+                break
 
 
-player = Character('Images/guy.png', 100, 100)
-
-while running: 
-    
-
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-
-    keys = pygame.key.get_pressed()       
-    if keys[K_a]:
-        player.x -= .5  
-    if keys[K_d]:
-        player.x += .5
-    if keys[K_w]:
-        player.y -= .5
-    if keys[K_s]:
-        player.y += .5
-
-    
-    screen.fill(background_colour)  
-    player.draw(screen)             
-    pygame.display.update()         
-
+if __name__ == "__main__":
+    main(window)
