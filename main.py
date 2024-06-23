@@ -179,17 +179,19 @@ def main(window):
     clock = pg.time.Clock()
     background, bg_image = get_background("Tile.png")
 
-    block_size = 64  # Ensure block size matches the image size
+    block_size = 64  #sets the block size
 
     player = Player(100, 675, 50, 50)
     floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-WIDTH // block_size, WIDTH * 2 // block_size)]
     
+    #sets all platforms
     objects = [*floor,
                Block(0,HEIGHT - block_size * 2 , block_size), 
                Block(block_size * 3,HEIGHT - block_size * 4 , block_size),
                Block(block_size * 4,HEIGHT - block_size * 5 , block_size),
                Block(block_size * 4,HEIGHT - block_size * 4 , block_size),
-               Block(block_size * 8,HEIGHT - block_size * 9 , block_size)
+               Block(block_size * 8,HEIGHT - block_size * 7 , block_size),
+               Block(block_size * 4,HEIGHT - block_size * 8 , block_size)
                ]
 
     #main game loop
